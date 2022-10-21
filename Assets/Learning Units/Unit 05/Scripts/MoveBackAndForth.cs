@@ -17,25 +17,26 @@ public class MoveBackAndForth : MonoBehaviour
     {
         ObjectsToMove = GetComponent<MoveObjects>().ObjectsToMove; // Keep this line and don't change it.
         GetComponent<MoveObjects>().enabled = false; // Keep this line and don't change it.
-        
+
         //DIRECTIONS: Uncomment the lines below and fix them
-        //startPositions = new Something;
-        //endPositions = new Something;
-        //foreach(something in Something)
-        //{
-        //    someList.Add(something.transform.position); // one of these lists needs this kind of position...
-        //    thisOtherList.Add(something.transform.position + new Vector3(0,0,10f)); // another one needs another...
-        //}
+        startPositions = new List<Vector3>();
+        endPositions = new List<Vector3>();
+        foreach (GameObject obj in ObjectsToMove)
+        {
+            startPositions.Add(obj.transform.position); // one of these lists needs this kind of position...
+            endPositions.Add(obj.transform.position + new Vector3(0, 0, 10f)); // another one needs another...
+        }
+        moveAmount = 0.01f;
     }
 
     // Update is called once per frame
     void Update()
     {
         //DIRECTIONS: Uncomment the lines below and fix them
-        //for (something; something.Count something; something)
-        //{
-        //    someList[something].transform.position = Vector3.Lerp(someOtherList[something], aThirdList[something], lerpAmount);
-        //}
+        for (int i = 0; i < ObjectsToMove.Count; i++)
+        {
+            ObjectsToMove[i].transform.position = Vector3.Lerp(startPositions[i], endPositions[i], lerpAmount);
+        }
 
         //Don't change anything below here!
         lerpAmount += moveAmount;
